@@ -2,27 +2,35 @@ import { getCategories, useCategories } from "./CategoryProvider.js"
 
 const eventHub = document.querySelector("#container")
 const contentTarget = document.querySelector(".filter__category")
+// a reference to the DOM element where the code will be rendered ^
 
 let categories = []
 
 export const CategorySelect = () => {
+  // fetching the API and loading it into application state
   getCategories()
+  // get the data ^
   // added missing .then
   .then(() => {
     categories = useCategories()
+    // get a copy of the data ^
     render()
+    // render the data to the dom ^
+    // console.log(render)
   })
   
 }
 
 const render = () => {
-  contentTarget.innerHtml = `
+  // html was lowercased in inner.HTML
+  contentTarget.innerHTML = `
       <select class="dropdown" id="categorySelect">
           <option value="0">All baked goods...</option>
           ${categories.map(category => `<option value="${category.id}">${category.name}</option>`).join("")}
       </select>
   `
-}
+} 
+// 
 
 eventHub.addEventListener("change", changeEvent => {
   if (changeEvent.target.id === "categorySelect") {
