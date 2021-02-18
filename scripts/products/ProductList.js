@@ -11,11 +11,12 @@ let bakeryCategories = []
 export const ProductList = () => {
   getProducts()
     .then(getCategories)
-    .then(() => {
+    .then( () => {
       bakeryProducts = useProducts()
       bakeryCategories = useCategories()
       render()
     })
+    
 }
 
 const render = () => {

@@ -21,3 +21,4 @@ export const customerLogin = (email, password) => {
     .then(res => res.json())
     .then(user => user.length ? user[0] : false)
 }
+
