@@ -27,3 +27,22 @@ const render = () => {
     return Product(product, productCategory)
   }).join("")
 }
+
+// figured out that i needed something to listen for when i actually picked an option
+eventHub.addEventListener("categorySelected", event => {
+
+
+  if(event.detail.selectedCategory > 0) {
+    
+    // selectedCategory = event.detail.selectedCategory
+    // bakeryProducts & bakeryCategories are empty arrays that will be filled with data after the filter/find methhods are used and then re assigned to filteredProducts & productCategory which will be only activated upon someone actually clicking an option on the drop down
+    const filteredProducts = bakeryProducts.filter(prod => prod.categoryId === event.detail.selectedCategory)
+    const productCategory = bakeryCategories.find(cat => cat.id === event.detail.selectedCategory)
+
+    contentTarget.innerHTML = filteredProducts.map(prod => Product(prod, productCategory)).join("")} 
+    else {
+    contentTarget.innerHTML = ProductList()
+    // product list is already called in main, if not it will not render any of the products
+  }
+
+})
