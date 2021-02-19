@@ -1,20 +1,29 @@
 import { getProducts, useProducts } from "./ProductProvider.js"
 import { getCategories, useCategories } from "../categories/CategoryProvider.js"
 import { Product } from "./Product.js"
+// imported reviews/customers
+import { getReviews, useReviews } from "../reviews/ReviewProvider.js"
+import { getCustomers, useCustomers } from "../customers/CustomerProvider.js"
 
 const eventHub = document.querySelector("#container")
 const contentTarget = document.querySelector(".menu__items")
 
 let bakeryProducts = []
 let bakeryCategories = []
+let reviews = []
+
 
 export const ProductList = () => {
   getProducts()
     .then(getCategories)
+
+    .then(getReviews)
+    .then(getCustomers)
     .then( () => {
       bakeryProducts = useProducts()
       bakeryCategories = useCategories()
-      render()
+      reviews = useReviews()
+      render(bakeryProducts, bakeryCategories)
     })
     
 }
@@ -23,10 +32,12 @@ const render = () => {
   contentTarget.innerHTML = bakeryProducts.map(product => {
     // cat.id was the bug, category.id is the fix
     const productCategory = bakeryCategories.find(category => category.id === product.categoryId)
+    // const productReviews = reviews.filter(review => review.productId === product.id)
 
-    return Product(product, productCategory)
+    return Product(product, productCategory, reviews)
   }).join("")
 }
+
 
 // figured out that i needed something to listen for when i actually picked an option
 eventHub.addEventListener("categorySelected", event => {
