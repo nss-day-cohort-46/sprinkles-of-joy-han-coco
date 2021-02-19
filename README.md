@@ -15,6 +15,8 @@ Add a pull request template for this project with these [instructions](https://d
 
 Your very first step is to create an Entity Relationship Diagram and get it approved by an instructor. Take a look at your database and use either dbdiagram.io or Lucidchart to build the ERD. Once your ERD has been approved, be sure to add a link to it in your README. If at any time during this project, your team needs to modify your ERD, please communicate the changes and get approval.
 
+ERD Link : https://dbdiagram.io/d/6022aaeb80d742080a39d999 
+
 ## A Note About Authentication
 
 We want you to know that the login code we have given you is fake, completely insecure, and would never be implemented in a professional application. It is a simulation authentication using very simplistic tools, because authentication is not a learning objective of students at NSS. You will be using [session storage](https://javascript.info/localstorage#sessionstorage) to keep track of which user has logged into the application.
