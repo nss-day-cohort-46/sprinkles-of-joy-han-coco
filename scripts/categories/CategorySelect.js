@@ -24,12 +24,24 @@ export const CategorySelect = () => {
 const render = () => {
   // html was lowercased in inner.HTML
   contentTarget.innerHTML = `
+  
       <select class="dropdown" id="categorySelect">
           <option value="0">All baked goods...</option>
           ${categories.map(category => `<option value="${category.id}">${category.name}</option>`).join("")}
+
       </select>
+      
+      <button id="reviewsList">
+          <option value="0">Place a Review..</option>
+          <input class="review" id="review" type="review">
+          
+          </input>
+          
+      </button>
+     
   `
 } 
+
 // 
 
 eventHub.addEventListener("change", changeEvent => {
