@@ -1,5 +1,6 @@
 import { bakeryAPI } from "../Settings.js"
 
+
 let customers = []
 
 export const useCustomers = () => customers.slice()
@@ -23,7 +24,7 @@ export const customerLogin = (email, password) => {
 }
 // added save customer function
 // it takes a customer object and posts it into the api
-export const saveCustomer = (customerObject) => {
+export const registerCustomer = (customerObject) => {
   return fetch(`${bakeryAPI.baseURL}/customers`, {
     method: "POST",
     headers: {
