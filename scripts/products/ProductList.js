@@ -40,6 +40,7 @@ const render = () => {
 
 
 // figured out that i needed something to listen for when i actually picked an option
+// // listen for the category selection, then filter the products by selection
 eventHub.addEventListener("categorySelected", event => {
 
 

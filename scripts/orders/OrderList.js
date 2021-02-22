@@ -12,6 +12,7 @@ export const OrderList = () => {
   if (authHelper.isUserLoggedIn()) {
 
     getOrders()
+      .then(getCustomer)
       .then(() => {
         customerOrders = useOrders()
         render()

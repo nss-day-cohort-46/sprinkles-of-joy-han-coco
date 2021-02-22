@@ -23,8 +23,8 @@ export const saveOrder = (order, productsInOrder) => {
     },
     body: JSON.stringify(order)
   })
-    .then(res => res.json())
-    .then(() => {
+    .then(res => res.json()) // gets the object that was saved
+    .then(() => {           // createdOrder is now the the order object that was gets saved
       const orderProducts = productsInOrder.map(product => {
         return {
           "orderId": createdOrder.id,
@@ -42,3 +42,4 @@ const dispatchStateChangeEvent = () => {
 
   eventHub.dispatchEvent(ordersStateChangedEvent)
 }
+
