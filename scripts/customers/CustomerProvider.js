@@ -21,4 +21,15 @@ export const customerLogin = (email, password) => {
     .then(res => res.json())
     .then(user => user.length ? user[0] : false)
 }
+// added save customer function
+// it takes a customer object and posts it into the api
+export const saveCustomer = (customerObject) => {
+  return fetch(`${bakeryAPI.baseURL}/customers`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body:JSON.stringify(customerObject)
+  })
+}
 

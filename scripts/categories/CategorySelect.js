@@ -31,16 +31,18 @@ const render = () => {
 
       </select>
       
-      <button id="reviewsList">
-          <option value="0">Place a Review..</option>
-          <input class="review" id="review" type="review">
-          
-          </input>
-          
-      </button>
+      
      
   `
 } 
+
+// {/* <button id="reviewsList">
+//           <option value="0">Place a Review..</option>
+//           <input class="review" id="review" type="review">
+          
+//           </input>
+          
+//       </button> */}
 
 // 
 

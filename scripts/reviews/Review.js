@@ -1,36 +1,19 @@
-import { authHelper } from "../auth/authHelper.js"
-import { getCustomer } from "../customers/CustomerProvider.js"
-import { deleteReview, useReviews } from "./ReviewProvider.js"
+import { useCustomers } from "../customers/CustomerProvider.js";
 
-const eventHub = document.querySelector('#container')
-const reviewModalElement = document.querySelector('.productReview')
+export const review = (productReviews) => {
 
-const reviewStars = [
-    "",
-    "⭐️",
-    "⭐️⭐️",
-    "⭐️⭐️⭐️",
-    "⭐️⭐️⭐️⭐️",
-    "⭐️⭐️⭐️⭐️⭐️"
-]
+    return productReviews.map(review => {
+        const allCustomers = useCustomers()
+        const customer = allCustomers.find(c => c.id === review.customerId)
+        const [firstName, lastName] = customer.name.split(" ")
 
-
-export const Review = (reviewWithCustomer) => {
-    return `
-    <div class="review">
-        <p class="review__rating" id="review__rating--${reviewWithCustomer.review.id}">${reviewStars[reviewWithCustomer.review.rating]}</p>
-        <strong>
-            <p class="review__name">${reviewWithCustomer.customer.name}</p>
-        </strong>
-    </div>
-    `
-}
-
-eventHub.addEventListener("click", e => {
-    if (e.target.id.includes("review__rating--")) {
-        const id = parseInt(e.target.id.split("--")[1])
-        const reviews = useReviews()
-        const review = reviews.find(r => r.id === id)
-        reviewModal(review)
-    }
-})
+        let stars = ""
+        for (let index = 0; index < review.rating; index++) {
+            stars += " ⭐ ";
+        }
+        let blankStars = ""
+        for (let index = 0; index < 5 - review.rating; index++) {
+            blankStars += " ☆ ";
+        }
+        return `<div>${firstName}<a href="#" id="reviewLink--${review.id}">${stars} ${blankStars}</a></div>`
+    })
