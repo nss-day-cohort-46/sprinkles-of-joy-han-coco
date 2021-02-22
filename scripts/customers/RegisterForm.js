@@ -52,3 +52,20 @@ eventHub.addEventListener("click", evt => {
     eventHub.dispatchEvent(customEvent)
   }
 })
+// listens for click on register button and saves the customer data
+eventHub.addEventListener("click", e => {
+  if (e.target.id === "customerRegister") {
+  const fullName = `${document.querySelector('#register-firstName').value} ${document.querySelector('#register-lastName').value}`
+  const email = document.querySelector('#register-email').value
+  const rewardsmember = document.querySelector('#register-rewards').checked
+  const password = document.querySelector('#register-password').value
+  
+  const customerObject = {
+      name: fullName,
+      rewardsMember: rewardsmember,
+      email: email,
+      password: password
+  }
+  saveCustomer(customerObject)
+}
+})

@@ -31,18 +31,22 @@ const render = () => {
 }
 
 eventHub.addEventListener("click", e => {
+  //if the ID matches customer login button
   if (e.target.id === "customerLogin") {
     e.preventDefault()
-    const loginEmail = document.querySelector(".login-email")
-    const loginPassword = document.querySelector(".login-password")
+    //grab inputs
+    const loginEmail = document.querySelector("#login-email").value
+    const loginPassword = document.querySelector("#login-password").value
+    //send email and password to API to fetch customer data
 
     customerLogin(loginEmail, loginPassword)
+    // user = user object with data info
       .then(user => {
         if (user) {
           contentTarget.innerHTML = ""
-
-          authHelper.storeUserInSessionStorage(user.id)
-
+          //pass user id into function that stores user login info
+          authHelper.storeUserInSessionStorage(user.id).value
+          //dispatches event that the user is logged in
           const customEvent = new CustomEvent("userLoggedIn")
           eventHub.dispatchEvent(customEvent)
         } else {
