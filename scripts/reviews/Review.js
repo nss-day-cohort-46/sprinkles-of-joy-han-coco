@@ -17,3 +17,5 @@ export const review = (productReviews) => {
         }
         return `<div>${firstName}<a href="#" id="reviewLink--${review.id}">${stars} ${blankStars}</a></div>`
     })
+
+}
