@@ -39,3 +39,8 @@ export const deleteReview = reviewId => {
         .then(getReviews)
         .then( ProductList() )
 }
+
+export const getReviewById = (reviewId) => {
+
+    return reviews.find(r => r.id === reviewId)
+  }

@@ -8,6 +8,12 @@ const userCart = document.querySelector(".userCart")
 
 let productsInCart = []
 
+//Event listener to listen if the order has been saved
+eventHub.addEventListener("ordersStateChanged", e => {
+  productsInCart = []
+  OpenCart()
+})
+
 export const OpenCart = () => {
   render()
 }
@@ -28,7 +34,7 @@ const render = () => {
 
   userCart.innerHTML = `
     <div>
-    <h4>Cart</h4>
+    <h4>Shopping Cart</h4>
     ${cartHTML}
     <hr/>
     <div class="cart">
@@ -39,10 +45,12 @@ const render = () => {
   `
 }
 
+
 eventHub.addEventListener("showCustomerCart", e => OpenCart())
 
 eventHub.addEventListener("addToCart", event => {
-  const productId = event.detail.productId
+  
+  const productId = event.detail.addedProduct
   getProducts()
     .then(() => {
       const allProducts = useProducts()
@@ -50,16 +58,18 @@ eventHub.addEventListener("addToCart", event => {
       productsInCart.push(productToBeAdded)
       OpenCart()
     })
+  
+  
 })
 
 eventHub.addEventListener("click", clickEvent => {
   if (clickEvent.target.id === "placeOrder" && productsInCart.length !== 0) {
+    if(authHelper.isUserLoggedIn()){
     const currentCustomerId = parseInt(authHelper.getCurrentUserId())
     getStatuses()
       .then(() => {
         const allStatuses = useStatuses()
         const initialOrderStatus = allStatuses.find(status => status.label.toLowerCase() === "Scheduled".toLowerCase())
-
         const newOrder = {
           "customerId": currentCustomerId,
           "statusId": initialOrderStatus.id,
@@ -68,5 +78,8 @@ eventHub.addEventListener("click", clickEvent => {
 
         return saveOrder(newOrder, productsInCart)
       })
+    }else{
+      alert("please login to place an order")
+    }
   }
 })
