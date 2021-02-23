@@ -3,7 +3,8 @@ import { saveOrderProducts } from "./OrderProductProvider.js"
 
 const eventHub = document.querySelector("#container")
 
-let orders = []
+// fixed variable naming 
+let customerOrders = []
 
 export const useOrders = () => orders.slice()
 
@@ -24,7 +25,7 @@ export const saveOrder = (order, productsInOrder) => {
     body: JSON.stringify(order)
   })
     .then(res => res.json()) // gets the object that was saved
-    .then(() => {           // createdOrder is now the the order object that was gets saved
+    .then( createdOrder => {         // createdOrder is now the the order object that was gets saved
       const orderProducts = productsInOrder.map(product => {
         return {
           "orderId": createdOrder.id,
@@ -43,3 +44,13 @@ const dispatchStateChangeEvent = () => {
   eventHub.dispatchEvent(ordersStateChangedEvent)
 }
 
+
+
+// debugger
+export const deleteOrder = (orderObj) => {
+  return fetch(`${bakeryAPI.baseURL}/orders/${orderObj.id}`, {
+    method: "DELETE"
+  })
+  .then(getOrders)
+  .then(dispatchStateChangeEvent)
+}

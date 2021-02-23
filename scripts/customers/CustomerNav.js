@@ -1,6 +1,7 @@
 import { authHelper } from "../auth/authHelper.js"
 import { getCustomer } from "../customers/CustomerProvider.js"
-
+import { LoginForm } from "./LoginForm.js"
+ 
 const eventHub = document.querySelector("#container")
 const userNav = document.querySelector(".userNav")
 
@@ -25,6 +26,11 @@ const render = (customer) => {
 }
 
 eventHub.addEventListener("userLoggedIn", event => {
+  CustomerNav()
+})
+
+
+eventHub.addEventListener("userRegistered", event => {
   CustomerNav()
 })
 

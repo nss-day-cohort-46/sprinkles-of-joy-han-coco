@@ -6,6 +6,8 @@ const contentTarget = document.querySelector(".form__register")
 
 let categories = []
 
+
+
 export const RegisterForm = () => {
   render()
 }
