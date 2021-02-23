@@ -5,6 +5,7 @@
 // Using Chrome DevTools with session storage:
 // https://developers.google.com/web/tools/chrome-devtools/storage/sessionstorage
 
+
 export const authHelper = {
   isUserLoggedIn: () => {
     if (sessionStorage.getItem("soj-customer-id")) {
